@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Black</title>
+    <style>
+      body {
+        background-color: black;
+      }
+
+      #time {
+        color: aliceblue;
+      }
+
+      button,
+      button:visited,
+      button:focus,
+      button:hover,
+      button:active {
+        border: 0;
+        outline: 0;
+        width: 20px;
+        height: 20px;
+        padding: 0;
+      }
+
+      button:hover {
+        cursor: pointer;
+      }
+
+      div {
+        text-align: right;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div>
+      <button style="background-color: black;" onclick="change('black')">
+        &nbsp;
+      </button>
+      <button style="background-color: #202020;" onclick="change('#202020')">
+        &nbsp;
+      </button>
+      <button style="background-color: #404040;" onclick="change('#404040')">
+        &nbsp;
+      </button>
+      <button style="background-color: dimgray;" onclick="change('dimgray')">
+        &nbsp;
+      </button>
+      <button style="background-color: gray;" onclick="change('gray')">
+        &nbsp;
+      </button>
+      <button style="background-color: darkgray;" onclick="change('darkgray')">
+        &nbsp;
+      </button>
+      <button style="background-color: silver;" onclick="change('silver')">
+        &nbsp;
+      </button>
+      <button
+        style="background-color: lightgray;"
+        onclick="change('lightgray')"
+      >
+        &nbsp;
+      </button>
+      <span id="time"></span>
+      <button
+        style="background-color: whitesmoke;"
+        onclick="toggleFullScreen()"
+      >
+        []
+      </button>
+    </div>
+  </body>
+
+  <script>
+    function tick() {
+      document.getElementById(
+        "time"
+      ).innerHTML = new Date().toLocaleTimeString();
+    }
+
+    setInterval(tick, 1000);
+
+    function change(color) {
+      document.body.style.backgroundColor = color;
+    }
+
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }
+  </script>
+</html>
