@@ -16,6 +16,7 @@
 
     #time {
       color: aliceblue;
+      padding-left: 5px;
     }
 
     button,
@@ -23,11 +24,12 @@
     button:focus,
     button:hover,
     button:active {
-      border: 2px solid white;
+      border: 1px solid white;
       outline: 0;
       width: 20px;
       height: 20px;
       padding: 0;
+      font-size: 0;
     }
 
     button:hover {
@@ -40,6 +42,12 @@
 
     h1 {
       display: none;
+    }
+
+    .main-row {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
     }
 
     .toggle {
@@ -58,7 +66,6 @@
 
     #color-shade {
       color: white;
-      border: 1px solid white;
       padding: 0 10px;
       font-size: 12px;
     }
@@ -70,31 +77,31 @@
     Black Screen Online - with time and full screen options. Full black screen
     for eye relaxation and dust cleaning
   </h1>
-  <div>
+  <div class="main-row">
     <span id="color-shade">Select Color Shade →</span>
     <button style="background-color: black;" onclick="change('black')">
-      &nbsp;
+      black
     </button>
     <button style="background-color: #202020;" onclick="change('#202020')">
-      &nbsp;
+      #202020
     </button>
     <button style="background-color: #404040;" onclick="change('#404040')">
-      &nbsp;
+      #404040
     </button>
     <button style="background-color: dimgray;" onclick="change('dimgray')">
-      &nbsp;
+      dimgray
     </button>
     <button style="background-color: gray;" onclick="change('gray')">
-      &nbsp;
+      gray
     </button>
     <button style="background-color: darkgray;" onclick="change('darkgray')">
-      &nbsp;
+      darkgray
     </button>
     <button style="background-color: silver;" onclick="change('silver')">
-      &nbsp;
+      silver
     </button>
     <button style="background-color: lightgray;" onclick="change('lightgray')">
-      &nbsp;
+      lightgray
     </button>
     <span id="time"></span>
   </div>
