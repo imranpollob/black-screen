@@ -119,7 +119,7 @@
 
   <div class="toggle">
     <button id="toggle-button" style="background-color: whitesmoke;" onclick="toggleFullScreen()">
-      Go Full Screen
+      Toggle Full Screen
     </button>
   </div>
 </body>
@@ -138,14 +138,11 @@
   }
 
   function toggleFullScreen() {
-    const btn = document.getElementById("toggle-button");
     if (!document.fullscreenElement) {
       document.documentElement.requestFullscreen();
-      btn.innerText = "Exit Full Screen";
     } else {
       if (document.exitFullscreen) {
         document.exitFullscreen();
-        btn.innerText = "Go Full Screen";
       }
     }
   }
