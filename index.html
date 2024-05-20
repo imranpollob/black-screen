@@ -1,151 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="shortcut icon" type="image/png" href="favicon.ico" />
+    <title>Black Screen Online - with time and full screen options</title>
+    <meta
+      name="description"
+      content="Full black screen for eye relaxation and dust cleaning"
+    />
+    <meta name="robots" content="”index," follow” />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
-<head>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145300963-2"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag("js", new Date());
+  </head>
 
-    gtag("config", "UA-145300963-2");
-  </script>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <link rel="shortcut icon" type="image/png" href="favicon.ico" />
-  <title>Black Screen Online - with time and full screen options</title>
-  <meta name="description" content="Full black screen for eye relaxation and dust cleaning" />
-  <meta name="robots" content="”index," follow” />
-  <style>
-    body {
-      background-color: black;
-    }
-
-    #time {
-      color: aliceblue;
-      padding-left: 5px;
-    }
-
-    button,
-    button:visited,
-    button:focus,
-    button:hover,
-    button:active {
-      border: 1px solid white;
-      outline: 0;
-      width: 20px;
-      height: 20px;
-      padding: 0;
-      font-size: 0;
-    }
-
-    button:hover {
-      cursor: pointer;
-    }
-
-    div {
-      text-align: right;
-    }
-
-    h1 {
-      display: none;
-    }
-
-    .main-row {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-    }
-
-    .toggle {
-      position: absolute;
-      bottom: 5px;
-      right: 5px;
-    }
-
-    #toggle-button {
-      width: auto;
-      height: auto;
-      padding: 4px 15px;
-      font-size: 12px;
-      font-weight: bold;
-    }
-
-    #color-shade {
-      color: white;
-      padding: 0 10px;
-      font-size: 12px;
-    }
-  </style>
 </head>
-
-<body>
-  <h1>
-    Black Screen Online - with time and full screen options. Full black screen
-    for eye relaxation and dust cleaning
-  </h1>
-  <div class="main-row">
-    <span id="color-shade">Select Color Shade →</span>
-    <button style="background-color: black;" onclick="change('black')">
-      black
+<body class="flex items-center justify-center min-h-screen bg-black">
+    <div class="absolute top-4 left-4">
+        <div id="clock" class="text-md text-white"></div>
+    </div>
+    <div class="absolute top-4 right-4 flex">
+        <button class="btn bg-black" onclick="setBackgroundColor('bg-black')"></button>
+        <button class="btn bg-gray-900" onclick="setBackgroundColor('bg-gray-900')"></button>
+        <button class="btn bg-gray-800" onclick="setBackgroundColor('bg-gray-800')"></button>
+        <button class="btn bg-gray-700" onclick="setBackgroundColor('bg-gray-700')"></button>
+        <button class="btn bg-gray-600" onclick="setBackgroundColor('bg-gray-600')"></button>
+        <button class="btn bg-gray-500" onclick="setBackgroundColor('bg-gray-500')"></button>
+        <button class="btn bg-gray-400" onclick="setBackgroundColor('bg-gray-400')"></button>
+        <button class="btn bg-gray-300" onclick="setBackgroundColor('bg-gray-300')"></button>
+    </div>
+    <button id="fullscreen-toggle" class="text-white">
+        <i class="fas fa-expand text-xl"></i>
     </button>
-    <button style="background-color: #202020;" onclick="change('#202020')">
-      #202020
-    </button>
-    <button style="background-color: #404040;" onclick="change('#404040')">
-      #404040
-    </button>
-    <button style="background-color: dimgray;" onclick="change('dimgray')">
-      dimgray
-    </button>
-    <button style="background-color: gray;" onclick="change('gray')">
-      gray
-    </button>
-    <button style="background-color: darkgray;" onclick="change('darkgray')">
-      darkgray
-    </button>
-    <button style="background-color: silver;" onclick="change('silver')">
-      silver
-    </button>
-    <button style="background-color: lightgray;" onclick="change('lightgray')">
-      lightgray
-    </button>
-    <span id="time"></span>
-  </div>
-
-  <div class="toggle">
-    <button id="toggle-button" style="background-color: whitesmoke;" onclick="toggleFullScreen()">
-      Toggle Full Screen
-    </button>
-  </div>
+    <script src="script.js"></script>
 </body>
-
-<script>
-  function tick() {
-    document.getElementById(
-      "time"
-    ).innerHTML = new Date().toLocaleTimeString();
-  }
-
-  setInterval(tick, 1000);
-
-  function change(color) {
-    document.body.style.backgroundColor = color;
-  }
-
-  function toggleFullScreen() {
-    if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen();
-    } else {
-      if (document.exitFullscreen) {
-        document.exitFullscreen();
-      }
-    }
-  }
-</script>
-
 </html>
