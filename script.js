@@ -26,12 +26,21 @@ function updateClock() {
   clock.textContent = `${hours}:${minutes}:${seconds} ${period}`;
 }
 
-
 // Update the clock every second
 setInterval(updateClock, 1000);
 updateClock();
 
-document.getElementById("fullscreen-toggle").addEventListener("click", () => {
+document
+  .getElementById("fullscreen-toggle")
+  .addEventListener("click", fullscreenToggle);
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "f") {
+    fullscreenToggle();
+  }
+});
+
+function fullscreenToggle() {
   const icon = document.querySelector("#fullscreen-toggle i");
   if (!document.fullscreenElement) {
     document.documentElement.requestFullscreen();
@@ -42,5 +51,4 @@ document.getElementById("fullscreen-toggle").addEventListener("click", () => {
     icon.classList.remove("fa-compress");
     icon.classList.add("fa-expand");
   }
-});
-
+}
