@@ -5,39 +5,112 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="shortcut icon" type="image/png" href="favicon.ico" />
-    <title>Black Screen Online - with time and full screen options</title>
+    <title>Black Screen Online - Eyestrain Relief & Ambient Display</title>
     <meta
       name="description"
-      content="Full black screen for eye relaxation and dust cleaning"
+      content="A minimal black screen overlay for screen testing, ambient displays, eye relaxation, and dust cleaning."
     />
-    <meta name="robots" content="”index," follow” />
+    <meta name="robots" content="index, follow" />
     <link rel="stylesheet" href="style.css" />
     <link
-      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
       rel="stylesheet"
     />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-
   </head>
+  <body>
+    <!-- Top Single Row App Header -->
+    <header class="app-header">
+      <div class="header-left">
+        <div id="clock" aria-live="off" aria-label="Current time"></div>
+      </div>
+      <div class="header-center">
+        <!-- Clicking this element toggles text configuration -->
+        <div
+          id="custom-text"
+          class="custom-text-display empty-pencil"
+          title="Configure Ambient Text"
+          aria-label="Configure Ambient Text"
+          role="button"
+          tabindex="0"
+        >
+          <i class="fas fa-pencil-alt"></i>
+        </div>
+      </div>
+      <div class="header-right">
+        <!-- Top-right controls toolbar -->
+        <nav class="toolbar" aria-label="Controls">
+          <!-- Burger menu button toggling the color popover -->
+          <button
+            id="menu-btn"
+            class="icon-btn"
+            popovertarget="menu-popover"
+            title="Background Colors"
+            aria-label="Toggle Color Menu"
+          >
+            <i class="fas fa-bars"></i>
+          </button>
 
-</head>
-<body class="flex items-center justify-center min-h-screen bg-black">
-    <div class="absolute top-4 left-4">
-        <div id="clock" class="text-md text-white"></div>
+          <!-- Fullscreen button -->
+          <button
+            id="fullscreen-toggle"
+            class="icon-btn"
+            title="Toggle Fullscreen (F)"
+            aria-label="Toggle Fullscreen"
+          >
+            <i class="fas fa-expand"></i>
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Native Popover for background colors -->
+    <div id="menu-popover" popover>
+      <div class="popover-card">
+        <h3>Predefined Colors</h3>
+        <div class="presets-grid" id="presets-grid">
+          <button class="color-dot active" data-color="#000000" style="background-color: #000000;" title="Pure Black" aria-label="Pure Black"></button>
+          <button class="color-dot" data-color="#1e293b" style="background-color: #1e293b;" title="Slate Gray" aria-label="Slate Gray"></button>
+          <button class="color-dot" data-color="#0f172a" style="background-color: #0f172a;" title="Night Blue" aria-label="Night Blue"></button>
+          <button class="color-dot" data-color="#022c22" style="background-color: #022c22;" title="Forest Green" aria-label="Forest Green"></button>
+          <button class="color-dot" data-color="#3b0764" style="background-color: #3b0764;" title="Deep Purple" aria-label="Deep Purple"></button>
+          <button class="color-dot" data-color="#1c1917" style="background-color: #1c1917;" title="Charcoal" aria-label="Charcoal"></button>
+          <button class="color-dot" data-color="#27272a" style="background-color: #27272a;" title="Zinc" aria-label="Zinc"></button>
+          <button class="color-dot" data-color="#52525b" style="background-color: #52525b;" title="Steel Gray" aria-label="Steel Gray"></button>
+        </div>
+        
+        <div class="custom-color-container">
+          <span class="custom-color-label">
+            <i class="fas fa-palette"></i> Custom Color
+          </span>
+          <div class="picker-wrapper">
+            <input type="color" id="custom-color-picker" title="Choose Custom Color" aria-label="Choose Custom Color" value="#000000" />
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="absolute top-4 right-4 flex">
-        <button class="btn bg-black" onclick="setBackgroundColor('bg-black')"></button>
-        <button class="btn bg-gray-900" onclick="setBackgroundColor('bg-gray-900')"></button>
-        <button class="btn bg-gray-800" onclick="setBackgroundColor('bg-gray-800')"></button>
-        <button class="btn bg-gray-700" onclick="setBackgroundColor('bg-gray-700')"></button>
-        <button class="btn bg-gray-600" onclick="setBackgroundColor('bg-gray-600')"></button>
-        <button class="btn bg-gray-500" onclick="setBackgroundColor('bg-gray-500')"></button>
-        <button class="btn bg-gray-400" onclick="setBackgroundColor('bg-gray-400')"></button>
-        <button class="btn bg-gray-300" onclick="setBackgroundColor('bg-gray-300')"></button>
-    </div>
-    <button id="fullscreen-toggle" class="text-white focus:outline-none">
-        <i class="fas fa-expand text-xl"></i>
-    </button>
+
+    <!-- Custom text input dialog modal -->
+    <dialog id="text-dialog">
+      <div class="dialog-header">Configure Ambient Text</div>
+      <form method="dialog" id="text-form">
+        <div class="dialog-body">
+          <input
+            type="text"
+            id="text-input"
+            class="text-input"
+            placeholder="Type custom message or label..."
+            maxlength="100"
+            autocomplete="off"
+            aria-label="Custom ambient text"
+          />
+        </div>
+        <div class="dialog-footer">
+          <button type="button" id="cancel-text-btn" class="btn-secondary">Cancel</button>
+          <button type="submit" id="save-text-btn" class="btn-primary">Save Changes</button>
+        </div>
+      </form>
+    </dialog>
+
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
