@@ -24,17 +24,35 @@
         <div id="clock" aria-live="off" aria-label="Current time"></div>
       </div>
       <div class="header-center">
-        <!-- Clicking this element toggles text configuration -->
-        <div
+        <!-- Ambient text display -->
+        <span
           id="custom-text"
-          class="custom-text-display empty-pencil"
-          title="Configure Ambient Text"
-          aria-label="Configure Ambient Text"
+          class="custom-text-display"
+          title="Click to edit focus text"
           role="button"
           tabindex="0"
+          style="display: none;"
+        ></span>
+        <!-- Pencil placeholder shown when empty -->
+        <button
+          id="pencil-btn"
+          class="icon-btn empty-pencil"
+          title="Click to edit focus text"
+          aria-label="Configure Ambient Text"
         >
           <i class="fas fa-pencil-alt"></i>
-        </div>
+        </button>
+        <!-- Inline input box hidden by default -->
+        <input
+          type="text"
+          id="custom-text-input"
+          class="inline-text-input"
+          placeholder="Type custom text..."
+          maxlength="100"
+          autocomplete="off"
+          style="display: none;"
+          aria-label="Ambient focus text"
+        />
       </div>
       <div class="header-right">
         <!-- Top-right controls toolbar -->
@@ -89,27 +107,7 @@
       </div>
     </div>
 
-    <!-- Custom text input dialog modal -->
-    <dialog id="text-dialog">
-      <div class="dialog-header">Configure Ambient Text</div>
-      <form method="dialog" id="text-form">
-        <div class="dialog-body">
-          <input
-            type="text"
-            id="text-input"
-            class="text-input"
-            placeholder="Type custom message or label..."
-            maxlength="100"
-            autocomplete="off"
-            aria-label="Custom ambient text"
-          />
-        </div>
-        <div class="dialog-footer">
-          <button type="button" id="cancel-text-btn" class="btn-secondary">Cancel</button>
-          <button type="submit" id="save-text-btn" class="btn-primary">Save Changes</button>
-        </div>
-      </form>
-    </dialog>
+
 
     <script src="script.js"></script>
   </body>

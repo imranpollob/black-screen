@@ -13,11 +13,9 @@ if (!('popover' in HTMLElement.prototype)) {
 const body = document.body;
 const clock = document.getElementById('clock');
 const customTextDisplay = document.getElementById('custom-text');
+const pencilBtn = document.getElementById('pencil-btn');
+const customTextInput = document.getElementById('custom-text-input');
 const fullscreenToggleBtn = document.getElementById('fullscreen-toggle');
-const textDialog = document.getElementById('text-dialog');
-const textForm = document.getElementById('text-form');
-const textInput = document.getElementById('text-input');
-const cancelTextBtn = document.getElementById('cancel-text-btn');
 const presetsGrid = document.getElementById('presets-grid');
 const customColorPicker = document.getElementById('custom-color-picker');
 
@@ -63,13 +61,15 @@ function setCustomText(text) {
   
   if (trimmedText) {
     customTextDisplay.textContent = trimmedText;
-    customTextDisplay.classList.remove('empty-pencil');
+    customTextDisplay.style.display = 'flex';
+    pencilBtn.style.display = 'none';
     localStorage.setItem(STORAGE_KEYS.CUSTOM_TEXT, trimmedText);
   } else {
-    customTextDisplay.innerHTML = '<i class="fas fa-pencil-alt"></i>';
-    customTextDisplay.classList.add('empty-pencil');
+    customTextDisplay.style.display = 'none';
+    pencilBtn.style.display = 'flex';
     localStorage.removeItem(STORAGE_KEYS.CUSTOM_TEXT);
   }
+  customTextInput.style.display = 'none';
 }
 
 // Load configurations from LocalStorage
@@ -112,41 +112,38 @@ customColorPicker.addEventListener('input', (event) => {
   setBackgroundColor(event.target.value);
 });
 
-// 6. Custom Text Dialog Overlay Handlers
-customTextDisplay.addEventListener('click', () => {
-  // Populate the input with current custom text value
-  textInput.value = customTextDisplay.getAttribute('data-text-value') || '';
-  textDialog.showModal();
-});
+// 6. Custom Text Inline Editor Handlers
+function startEditing() {
+  customTextDisplay.style.display = 'none';
+  pencilBtn.style.display = 'none';
+  customTextInput.style.display = 'block';
+  customTextInput.value = customTextDisplay.getAttribute('data-text-value') || '';
+  customTextInput.focus();
+  customTextInput.select();
+}
 
-cancelTextBtn.addEventListener('click', () => {
-  textDialog.close();
-});
+function finishEditing(save) {
+  if (save) {
+    setCustomText(customTextInput.value);
+  } else {
+    const savedText = localStorage.getItem(STORAGE_KEYS.CUSTOM_TEXT) || '';
+    setCustomText(savedText);
+  }
+}
 
-// Form submit automatically closes the method="dialog" form, but we capture the value here
-textForm.addEventListener('submit', (event) => {
-  setCustomText(textInput.value);
-});
+customTextDisplay.addEventListener('click', startEditing);
+pencilBtn.addEventListener('click', startEditing);
 
-// Close dialog when clicking outside the container (on the backdrop)
-textDialog.addEventListener('click', (event) => {
-  const rect = textDialog.getBoundingClientRect();
-  const isInDialog = (
-    rect.top <= event.clientY &&
-    event.clientY <= rect.top + rect.height &&
-    rect.left <= event.clientX &&
-    event.clientX <= rect.left + rect.width
-  );
-  if (!isInDialog) {
-    textDialog.close();
+customTextInput.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') {
+    finishEditing(true);
+  } else if (event.key === 'Escape') {
+    finishEditing(false);
   }
 });
 
-// Blur the customTextDisplay when dialog closes to prevent it from remaining highlighted
-textDialog.addEventListener('close', () => {
-  setTimeout(() => {
-    customTextDisplay.blur();
-  }, 0);
+customTextInput.addEventListener('blur', () => {
+  finishEditing(true);
 });
 
 // Cross-browser helper to check active fullscreen element
@@ -227,8 +224,8 @@ fsChangeEvents.forEach(eventType => {
 
 // Keyboard shortcut (press 'f' or 'F' to toggle fullscreen)
 document.addEventListener("keydown", (event) => {
-  // Prevent triggering when the user is typing in the text input dialog
-  if (document.activeElement === textInput) {
+  // Prevent triggering when the user is typing in the inline text input
+  if (document.activeElement === customTextInput) {
     return;
   }
   
