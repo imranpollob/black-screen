@@ -1,0 +1,32 @@
+{
+  "name": "Black Screen Online",
+  "short_name": "BlackScreen",
+  "description": "Minimal full-screen display for eyestrain relief, OLED screen testing, ambient clock, and monitor cleaning.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "fullscreen",
+  "display_override": ["fullscreen", "standalone", "minimal-ui"],
+  "background_color": "#000000",
+  "theme_color": "#042f2e",
+  "orientation": "any",
+  "categories": ["utilities", "productivity"],
+  "icons": [
+    {
+      "src": "assets/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
